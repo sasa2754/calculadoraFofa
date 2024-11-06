@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Touchable } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export type IButton = {
   width: number;
@@ -7,14 +8,15 @@ export type IButton = {
   color: string;
   text: string;
   colorText: string;
+  onPress: (text: string) => void;
 };
 
-export function Button({ width, height, color, text, colorText }: IButton) {
+export function Button({ width, height, color, text, colorText, onPress }: IButton) {
 
     const buttonStyle = {
     width: width,   
     height: height, 
-    backgroundColor: color, 
+    backgroundColor: color,
   };
 
   const textStyle = {
@@ -23,9 +25,12 @@ export function Button({ width, height, color, text, colorText }: IButton) {
   };
 
   return (
-    <View style={[styles.button, buttonStyle]}>
-      <Text style={[styles.text, textStyle]}>{text}</Text>
-    </View>
+
+    <TouchableOpacity onPress={() => onPress(text)}>
+        <View style={[styles.button, buttonStyle]}>
+        <Text style={[styles.text, textStyle]}>{text}</Text>
+        </View>
+    </TouchableOpacity>
   );
 }
 
