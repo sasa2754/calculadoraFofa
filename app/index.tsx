@@ -1,7 +1,8 @@
 import { Button } from "@/components/Button/buttons";
 import { useEffect, useState } from "react";
 import { Dimensions, SafeAreaView, StyleSheet, View, Image, Alert, TextInput } from "react-native";
-import math from 'mathjs';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 const { width, height } = Dimensions.get('window');
 
 const colorIcon = "#BE3F89FF";
@@ -16,6 +17,7 @@ const styles = StyleSheet.create({
     },
 
     box: {
+        flex: 3,
         alignItems: 'center'
     },
 
@@ -166,76 +168,77 @@ export default function Index() {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.inputBox}>
-                <TextInput style={styles.input} value={inputText} onChangeText={setInputText} keyboardType="numeric"/>
-            </View>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+            <SafeAreaView style={styles.container}>
+                <View style={styles.inputBox}>
+                    <TextInput style={styles.input} value={inputText} onChangeText={setInputText} keyboardType="numeric"/>
+                </View>
 
-            <View style={styles.box}>
+                <View style={styles.box}>
 
-                <View style={styles.iconBox}>
-                    <View style={{flexDirection: 'row', gap: 14}}>
-                        <Image style={styles.icon} source={require('@/assets/images/relogio.png')} resizeMode="contain"></Image>
-                        <Image style={styles.icon} source={require('@/assets/images/regua.png')} resizeMode="contain"></Image>
+                    <View style={styles.iconBox}>
+                        <View style={{flexDirection: 'row', gap: 14}}>
+                            <Image style={styles.icon} source={require('@/assets/images/relogio.png')} resizeMode="contain"></Image>
+                            <Image style={styles.icon} source={require('@/assets/images/regua.png')} resizeMode="contain"></Image>
+                        </View>
+                        <Image style={styles.icon} source={require('@/assets/images/apagar.png')} resizeMode="contain"></Image>
                     </View>
-                    <Image style={styles.icon} source={require('@/assets/images/apagar.png')} resizeMode="contain"></Image>
+
+                    <View style={styles.line}></View>
+
+                    <View style={styles.buttonBox}>
+                        {/* <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"C"} colorText={"#ffffff"} onPress={operation}/>
+                        <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"()"} colorText={"#ffffff"} onPress={operation}/>
+                        <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"%"} colorText={"#ffffff"} onPress={operation}/>
+                        <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"/"} colorText={"#ffffff"} onPress={operation}/>
+
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"9"} colorText={"#ffffff"} onPress={addNumber}/>
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"8"} colorText={"#ffffff"} onPress={addNumber}/>
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"7"} colorText={"#ffffff"} onPress={addNumber}/>
+                        <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"*"} colorText={"#ffffff"} onPress={operation}/>
+
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"4"} colorText={"#ffffff"} onPress={addNumber}/>
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"5"} colorText={"#ffffff"} onPress={addNumber}/>
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"6"} colorText={"#ffffff"} onPress={addNumber}/>
+                        <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"-"} colorText={"#ffffff"} onPress={operation}/>
+
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"1"} colorText={"#ffffff"} onPress={addNumber}/>
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"2"} colorText={"#ffffff"} onPress={addNumber}/>
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"3"} colorText={"#ffffff"} onPress={addNumber}/>
+                        <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"+"} colorText={"#ffffff"} onPress={operation}/>
+
+                        <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"+/-"} colorText={"#ffffff"} onPress={operation}/>
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"0"} colorText={"#ffffff"} onPress={addNumber}/>
+                        <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"."} colorText={"#ffffff"} onPress={operation}/>
+                        <Button width={width / 4.5} height={height / 11} color={colorEqual} text={"="} colorText={"#ffffff"} onPress={operation}/> */}
+                        <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"C"} colorText={"#ffffff"} onPress={() => handleOperation("C")} />
+                        <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"()"} colorText={"#ffffff"} onPress={() => handleOperation("C")} />
+                        <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"%"} colorText={"#ffffff"} onPress={() => handleOperation("%")} />
+                        <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"/"} colorText={"#ffffff"} onPress={() => handleOperation("/")} />
+
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"7"} colorText={"#ffffff"} onPress={() => addNumber("7")} />
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"8"} colorText={"#ffffff"} onPress={() => addNumber("8")} />
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"9"} colorText={"#ffffff"} onPress={() => addNumber("9")} />
+                        <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"*"} colorText={"#ffffff"} onPress={() => handleOperation("*")} />
+
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"4"} colorText={"#ffffff"} onPress={() => addNumber("4")} />
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"5"} colorText={"#ffffff"} onPress={() => addNumber("5")} />
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"6"} colorText={"#ffffff"} onPress={() => addNumber("6")} />
+                        <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"-"} colorText={"#ffffff"} onPress={() => handleOperation("-")} />
+
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"1"} colorText={"#ffffff"} onPress={() => addNumber("1")} />
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"2"} colorText={"#ffffff"} onPress={() => addNumber("2")} />
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"3"} colorText={"#ffffff"} onPress={() => addNumber("3")} />
+                        <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"+"} colorText={"#ffffff"} onPress={() => handleOperation("+")} />
+
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"+/-"} colorText={"#ffffff"} onPress={() => addNumber("C")} />
+                        <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"0"} colorText={"#ffffff"} onPress={() => addNumber("0")} />
+                        <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"."} colorText={"#ffffff"} onPress={() => addNumber(".")} />
+                        <Button width={width / 4.5} height={height / 11} color={colorEqual} text={"="} colorText={"#ffffff"} onPress={() => handleOperation("=")} />
+                    </View>
                 </View>
-
-                <View style={styles.line}></View>
-
-                <View style={styles.buttonBox}>
-                    {/* <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"C"} colorText={"#ffffff"} onPress={operation}/>
-                    <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"()"} colorText={"#ffffff"} onPress={operation}/>
-                    <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"%"} colorText={"#ffffff"} onPress={operation}/>
-                    <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"/"} colorText={"#ffffff"} onPress={operation}/>
-
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"9"} colorText={"#ffffff"} onPress={addNumber}/>
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"8"} colorText={"#ffffff"} onPress={addNumber}/>
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"7"} colorText={"#ffffff"} onPress={addNumber}/>
-                    <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"*"} colorText={"#ffffff"} onPress={operation}/>
-
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"4"} colorText={"#ffffff"} onPress={addNumber}/>
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"5"} colorText={"#ffffff"} onPress={addNumber}/>
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"6"} colorText={"#ffffff"} onPress={addNumber}/>
-                    <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"-"} colorText={"#ffffff"} onPress={operation}/>
-
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"1"} colorText={"#ffffff"} onPress={addNumber}/>
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"2"} colorText={"#ffffff"} onPress={addNumber}/>
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"3"} colorText={"#ffffff"} onPress={addNumber}/>
-                    <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"+"} colorText={"#ffffff"} onPress={operation}/>
-
-                    <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"+/-"} colorText={"#ffffff"} onPress={operation}/>
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"0"} colorText={"#ffffff"} onPress={addNumber}/>
-                    <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"."} colorText={"#ffffff"} onPress={operation}/>
-                    <Button width={width / 4.5} height={height / 11} color={colorEqual} text={"="} colorText={"#ffffff"} onPress={operation}/> */}
-                    <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"C"} colorText={"#ffffff"} onPress={() => handleOperation("C")} />
-                    <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"()"} colorText={"#ffffff"} onPress={() => handleOperation("C")} />
-                    <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"%"} colorText={"#ffffff"} onPress={() => handleOperation("%")} />
-                    <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"/"} colorText={"#ffffff"} onPress={() => handleOperation("/")} />
-
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"7"} colorText={"#ffffff"} onPress={() => addNumber("7")} />
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"8"} colorText={"#ffffff"} onPress={() => addNumber("8")} />
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"9"} colorText={"#ffffff"} onPress={() => addNumber("9")} />
-                    <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"*"} colorText={"#ffffff"} onPress={() => handleOperation("*")} />
-
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"4"} colorText={"#ffffff"} onPress={() => addNumber("4")} />
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"5"} colorText={"#ffffff"} onPress={() => addNumber("5")} />
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"6"} colorText={"#ffffff"} onPress={() => addNumber("6")} />
-                    <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"-"} colorText={"#ffffff"} onPress={() => handleOperation("-")} />
-
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"1"} colorText={"#ffffff"} onPress={() => addNumber("1")} />
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"2"} colorText={"#ffffff"} onPress={() => addNumber("2")} />
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"3"} colorText={"#ffffff"} onPress={() => addNumber("3")} />
-                    <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"+"} colorText={"#ffffff"} onPress={() => handleOperation("+")} />
-
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"+/-"} colorText={"#ffffff"} onPress={() => addNumber("C")} />
-                    <Button width={width / 4.5} height={height / 11} color={colorNumber} text={"0"} colorText={"#ffffff"} onPress={() => addNumber("0")} />
-                    <Button width={width / 4.5} height={height / 11} color={colorIcon} text={"."} colorText={"#ffffff"} onPress={() => addNumber(".")} />
-                    <Button width={width / 4.5} height={height / 11} color={colorEqual} text={"="} colorText={"#ffffff"} onPress={() => handleOperation("=")} />
-                </View>
-            </View>
-
-        </SafeAreaView>
+            </SafeAreaView>
+      </GestureHandlerRootView>
     );
 }
 
